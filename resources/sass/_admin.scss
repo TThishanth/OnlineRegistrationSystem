@@ -1,0 +1,181 @@
+html,body,h1,h2,h3,h4,h5 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    font-size: 15px;
+    max-width:100%;
+}
+
+.navFSize {
+    font-size: 17px;
+}
+
+/* Style the sidenav links and the dropdown button */
+.dropdown-btn {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    color: #000;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+}
+
+.dashSet {
+    font-size: 17px;
+    width: 100%;
+    height: auto;
+    border: none;
+}
+
+#main {
+    background-color: #f1f1f1;
+    min-height: 643px;
+}
+
+.w3-main {
+    margin-left:300px; 
+    margin-top:43px;
+    padding-top: 20px; 
+}   
+
+.w3-Size {
+    font-size: 20px;
+    padding: 2px 16px;
+}
+
+/* Code for form delete button */
+.delButton {
+    margin-top: -80px;
+    margin-left: 105px; 
+}
+
+.navbar-nav .dropdown-menu {
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+#myAdmin {
+    margin-bottom: -16px;
+}
+/* Styles for only tap screens */
+@media screen and (max-width: 992px){
+    #home {
+        padding-right: 15px;
+    }
+    .container {
+        max-width: 850px;
+    }
+    .container {
+        padding-right: 13px;
+        padding-left: 13px;
+    }
+}
+
+/* Styles for only mobile views */
+@media only screen and (max-width: 600px) {
+    .w3-main {
+       padding: 0; 
+    }
+    .w3-Size {
+        font-size: 16px;
+        padding: 0;
+    
+    }
+    .col-sm-9 {
+        padding-top: 15px;
+    }
+    /* Code for Delete button */
+    .mt-0 {
+        margin-top: -110px;
+    }
+    /* Code for submit button */
+    .subButton {
+        margin-left: 13px;
+    }
+    /* Code for form delete button */
+    .delButton {
+        margin-top: -80px;
+        margin-left: 119px;
+    } 
+    /* Code for logout option */
+    #logOut {
+        margin-top: -9px;
+    }
+    .dropdown-menu-right {
+        margin-left: -66px;
+    }
+    .container {
+        padding-right: 19px;
+        padding-left: 11px;
+    }
+    #myAdmin {
+        margin-top: -8px;
+    }
+    
+}
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.dropdown-container {
+    display: none;
+    padding-left: 10px;
+}
+  
+/* Optional: Style the caret down icon */
+.fa-caret-down {
+    float: right;
+    padding-right: 8px;
+}
+
+/* Optional: Style the Posts row */
+.fa-arrow-circle-o-down {
+    float: right;
+    padding-right: 50px;
+}
+
+/* Optional: Style the User name position in sidenav */
+.nav-link {
+    margin-top: 4px;
+    font-size: 16px;
+}
+
+/* Optional: Style the button in form */
+
+
+/* Style for User part in admin sidebar */
+.w3-circle {
+    margin-left: 16px;
+}
+
+#adminName {
+    padding-top: 5px;
+}
+
+
+
+// End of the admin page code 
+/* ==========================================================================================================
+============================================================================================================= */
+
+// Code for tables
+
+table, th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+// Code for Centering contents
+
+.content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
