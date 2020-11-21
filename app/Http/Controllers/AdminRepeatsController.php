@@ -20,7 +20,7 @@ class AdminRepeatsController extends Controller
     {
         $repeats = Repeat::all();
 
-        return view('admin.repeatExam.index',compact('repeats'));
+        return view('admin.repeatExam.index', compact('repeats'));
     }
 
     /**
@@ -40,35 +40,38 @@ class AdminRepeatsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(RepeatsCreateRequest $request)
-    {  
+    {
         $input = $request->all();
 
         $user = Auth::user();
 
-        $subjects = $input['course'] ;
+        if ($user->role_id == 2) {
+            $subjects = $input['course'];
 
-        $subjects = implode(",\n ", $subjects);
+            $subjects = implode(",\n ", $subjects);
 
-        $input['course'] = $subjects;
+            $input['course'] = $subjects;
 
-        if($file = $request->file('photo_id')){
+            if ($file = $request->file('photo_id')) {
 
-            $name = time() . $file->getClientOriginalName();
+                $name = time() . $file->getClientOriginalName();
 
-            $file->move('images',$name);
+                $file->move('images', $name);
 
-            $photo = Photo::create(['file'=>$name]);
+                $photo = Photo::create(['file' => $name]);
 
-            $input['photo_id'] = $photo->id; 
+                $input['photo_id'] = $photo->id;
+            }
 
+            $user->repeat()->create($input);
+
+            Session::flash('flash_message', 'Repeat Examination Form Submitted successfully!');
+            Session::flash('flash_type', 'alert-success');
+
+            return redirect('home');
+        } else {
+            return redirect('/notAllowed');
         }
-
-        $user->repeat()->create($input);
-
-        Session::flash('flash_message', 'Repeat Examination Form Submitted successfully!');
-	    Session::flash('flash_type', 'alert-success');
-
-        return redirect('home'); 
     }
 
     /**
@@ -125,7 +128,7 @@ class AdminRepeatsController extends Controller
         $repeat->delete();
 
         Session::flash('flash_message', 'Repeat Examination Form deleted successfully!');
-	    Session::flash('flash_type', 'alert-warning');
+        Session::flash('flash_type', 'alert-warning');
 
         return redirect()->back();
     }

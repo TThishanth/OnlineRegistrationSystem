@@ -19,8 +19,8 @@ class AdminHostelsController extends Controller
     public function index()
     {
         $hostels = Hostel::all();
-        
-        return view('admin.hostelForm.index',compact('hostels'));
+
+        return view('admin.hostelForm.index', compact('hostels'));
     }
 
     /**
@@ -45,24 +45,27 @@ class AdminHostelsController extends Controller
 
         $user = Auth::user();
 
-        if($file = $request->file('photo_id')){
+        if ($user->role_id == 2) {
+            if ($file = $request->file('photo_id')) {
 
-            $name = time() . $file->getClientOriginalName();
+                $name = time() . $file->getClientOriginalName();
 
-            $file->move('images',$name);
+                $file->move('images', $name);
 
-            $photo = Photo::create(['file'=>$name]);
+                $photo = Photo::create(['file' => $name]);
 
-            $input['photo_id'] = $photo->id; 
+                $input['photo_id'] = $photo->id;
+            }
 
+            $user->hostel()->create($input);
+
+            Session::flash('flash_message', 'Hostel Registration Form Submitted successfully!');
+            Session::flash('flash_type', 'alert-success');
+
+            return redirect('home');
+        } else {
+            return redirect('/notAllowed');
         }
-
-        $user->hostel()->create($input);
-
-        Session::flash('flash_message', 'Hostel Registration Form Submitted successfully!');
-	    Session::flash('flash_type', 'alert-success');
-
-        return redirect('home'); 
     }
 
     /**
@@ -97,20 +100,17 @@ class AdminHostelsController extends Controller
     public function update(Request $request, $id)
     {
         $hostel = Hostel::findOrFail($id);
-        
+
         $hostel->update($request->all());
 
         Session::flash('flash_message', 'Hostel Registration Form Approved/Un-approved successfully!');
         Session::flash('flash_type', 'alert-info');
 
-        if($hostel->sex == 'Male'){
+        if ($hostel->sex == 'Male') {
             return redirect('/admin/boysHostel');
-        }
-
-        elseif($hostel->sex == 'Female'){
+        } elseif ($hostel->sex == 'Female') {
             return redirect('/admin/girlsHostel');
         }
-        
     }
 
     /**
@@ -128,7 +128,7 @@ class AdminHostelsController extends Controller
         $hostel->delete();
 
         Session::flash('flash_message', 'Hostel Registration Form deleted successfully!');
-	    Session::flash('flash_type', 'alert-warning');
+        Session::flash('flash_type', 'alert-warning');
 
         return redirect()->back();
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Academic;
 use App\Http\Requests\AcademicsCreateRequest;
 use App\Photo;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -19,8 +20,8 @@ class AdminAcademicsController extends Controller
     public function index()
     {
         $academics = Academic::all();
-        
-        return view('admin.academicForm.index',compact('academics'));
+
+        return view('admin.academicForm.index', compact('academics'));
     }
 
     /**
@@ -45,75 +46,78 @@ class AdminAcademicsController extends Controller
 
         $user = Auth::user();
 
+        if ($user->role_id == 2) {
+            $Fsem = $input['Fsemcourse'];
 
-        $Fsem = $input['Fsemcourse'] ;
+            $Fsem = implode(",\n ", $Fsem);
 
-        $Fsem = implode(",\n ", $Fsem);
-
-        $input['Fsemcourse'] = $Fsem ;
-
-
-        $Ssem = $input['Ssemcourse'] ;
-
-        $Ssem = implode(",\n ", $Ssem);
-
-        $input['Ssemcourse'] = $Ssem ;
+            $input['Fsemcourse'] = $Fsem;
 
 
-        $year = $input['Exyear'] ;
+            $Ssem = $input['Ssemcourse'];
 
-        $year = implode(" \n ", $year);
+            $Ssem = implode(",\n ", $Ssem);
 
-        $input['Exyear'] = $year ;
-
-
-        $index = $input['indexNo'] ;
-
-        $index = implode(" \n ", $index);
-
-        $input['indexNo'] = $index ;
+            $input['Ssemcourse'] = $Ssem;
 
 
-        $exam = $input['Examination'] ;
+            $year = $input['Exyear'];
 
-        $exam = implode(" \n ", $exam);
+            $year = implode(" \n ", $year);
 
-        $input['Examination'] = $exam ;
-
-
-        $medium = $input['medium'] ;
-
-        $medium = implode(" \n ", $medium);
-
-        $input['medium'] = $medium ;
+            $input['Exyear'] = $year;
 
 
-        $result = $input['Results'] ;
+            $index = $input['indexNo'];
 
-        $result = implode(" \n ", $result);
+            $index = implode(" \n ", $index);
 
-        $input['Results'] = $result ; 
+            $input['indexNo'] = $index;
 
-     
 
-        if($file = $request->file('photo_id')){
+            $exam = $input['Examination'];
 
-            $name = time() . $file->getClientOriginalName();
+            $exam = implode(" \n ", $exam);
 
-            $file->move('images',$name);
+            $input['Examination'] = $exam;
 
-            $photo = Photo::create(['file'=>$name]);
 
-            $input['photo_id'] = $photo->id; 
+            $medium = $input['medium'];
 
+            $medium = implode(" \n ", $medium);
+
+            $input['medium'] = $medium;
+
+
+            $result = $input['Results'];
+
+            $result = implode(" \n ", $result);
+
+            $input['Results'] = $result;
+
+
+
+            if ($file = $request->file('photo_id')) {
+
+                $name = time() . $file->getClientOriginalName();
+
+                $file->move('images', $name);
+
+                $photo = Photo::create(['file' => $name]);
+
+                $input['photo_id'] = $photo->id;
+            }
+
+            $user->academic()->create($input);
+
+            Session::flash('flash_message', 'Academic Registration Form Submitted successfully!');
+            Session::flash('flash_type', 'alert-success');
+
+            return redirect('home');
         }
-
-        $user->academic()->create($input);
-
-        Session::flash('flash_message', 'Academic Registration Form Submitted successfully!');
-	    Session::flash('flash_type', 'alert-success');
-
-        return redirect('home');
+        else {
+            return redirect('/notAllowed');
+        }
     }
 
     /**
@@ -170,7 +174,7 @@ class AdminAcademicsController extends Controller
         $academic->delete();
 
         Session::flash('flash_message', 'Academic Registration Form deleted successfully!');
-	    Session::flash('flash_type', 'alert-warning');
+        Session::flash('flash_type', 'alert-warning');
 
         return redirect()->back();
     }
