@@ -32,7 +32,6 @@ Route::post('admin/academics', 'AdminAcademicsController@store');
 
 Route::post('admin/hostels', 'AdminHostelsController@store');
 
-
 Route::group(['middleware'=>'admin'],function(){
 
     Route::resource('admin/users', 'AdminUsersController')->middleware('useradmin');

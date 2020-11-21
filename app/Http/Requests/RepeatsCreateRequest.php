@@ -26,22 +26,22 @@ class RepeatsCreateRequest extends FormRequest
         return [
             'year'=> 'required', 
             'semester'=> 'required', 
-            'regNo'=> 'required', 
-            'indexNo'=> 'required', 
+            'regNo'=> 'required|max:9', 
+            'indexNo'=> 'required|max:9', 
             'medium'=> 'required', 
             'fullName'=> 'required', 
             'course'=> 'required', 
             'address'=> 'required', 
             'addressEx'=> 'required', 
-            'contactNo'=> 'required', 
-            'admissionDate'=> 'required', 
+            'contactNo'=> 'required|max:10', 
+            'admissionDate'=> 'required|date', 
             'registered'=> 'required', 
-            'paymentDate'=> 'required', 
+            'paymentDate'=> 'required|date', 
             'reasons'=> 'required', 
             'amount'=> 'required', 
             'amountPayDate'=> 'required', 
             'receiptNo'=> 'required', 
-            'photo_id'=> 'required', 
+            'photo_id'=> 'required|image', 
         ];
     }
 }

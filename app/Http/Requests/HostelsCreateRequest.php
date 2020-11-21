@@ -26,11 +26,11 @@ class HostelsCreateRequest extends FormRequest
         return [
             'fullName'=> 'required',
             'name'=> 'required',
-            'regNo'=> 'required',
+            'regNo'=> 'required|max:9',
             'sex'=> 'required',
             'address'=> 'required',
             'presentAddress'=> 'required', 
-            'contactNo'=> 'required',
+            'contactNo'=> 'required|max:10',
             'registered'=> 'required',
             'paymentDate'=> 'required',
             'faculty'=> 'required',
@@ -39,7 +39,7 @@ class HostelsCreateRequest extends FormRequest
             'amount'=> 'required',
             'amountPayDate'=> 'required',
             'receiptNo'=> 'required',
-            'photo_id'=> 'required',
+            'photo_id'=> 'required|image',
         ];
     }
 }

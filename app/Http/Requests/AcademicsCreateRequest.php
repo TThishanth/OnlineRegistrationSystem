@@ -26,13 +26,13 @@ class AcademicsCreateRequest extends FormRequest
         return [
             'fullName'=> 'required', 
             'name'=> 'required', 
-            'regNo'=> 'required', 
+            'regNo'=> 'required|max:9', 
             'address'=> 'required', 
-            'hNumber'=> 'required',
+            'hNumber'=> 'required|max:10',
             'presentAddress'=> 'required',
-            'pNumber'=> 'required',
+            'pNumber'=> 'required|max:10',
             'contactAddress'=> 'required', 
-            'cNumber'=> 'required',
+            'cNumber'=> 'required|max:10',
             'faculty'=> 'required',
             'year'=> 'required', 
             'department'=> 'required',
@@ -40,7 +40,7 @@ class AcademicsCreateRequest extends FormRequest
             'Fsemcourse'=> 'required',
             'Ssemcourse'=> 'required',
             'Exyear'=> 'required',
-            'indexNo'=> 'required',
+            'indexNo'=> 'required|max:9',
             'Examination'=> 'required',
             'medium'=> 'required',
             'Results'=> 'required',
@@ -48,7 +48,7 @@ class AcademicsCreateRequest extends FormRequest
             'amount'=> 'required',
             'amountPayDate'=> 'required',
             'receiptNo'=> 'required',
-            'photo_id'=> 'required',
+            'photo_id'=> 'required|image',
         ];
     }
 }
