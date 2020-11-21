@@ -23,8 +23,7 @@ Route::get('/reset', 'HomeController@reset');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/admin', 'AdminDashboardController@index');
-
+Route::get('/admin', 'AdminDashboardController@index')->middleware('admin');
 
 Route::post('admin/repeats', 'AdminRepeatsController@store');
 
