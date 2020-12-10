@@ -1,14 +1,14 @@
 ## Laravel Online Registration System
 
 Laravel Version
-  - 7
+  - 7.15.0
 
 Database
   - MySQL/phpMyAdmin
 
 I done mini project related to online registration system for the students of Sabaragamuwa University of Sri Lanka.
 
-Working forms for users
+Forms for users
   - Academic Year Registration Form
   - Hostel Registration Form
   - Repeat Exam Application Submissions Form
@@ -32,4 +32,4 @@ Languages
        - Girls hostel Warden
    - Students
    
- Authentication functions run regarding the role of user.
+ Authentication functions will be run regarding to the role of user.
