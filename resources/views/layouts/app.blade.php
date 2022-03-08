@@ -69,6 +69,13 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                    @if (Auth::user()->role->name == 'Administrator' || Auth::user()->role->name == 'Head of the Dept.' || Auth::user()->role->name == 'Coordinator' || Auth::user()->role->name == 'Dean' || Auth::user()->role->name == 'Boys hostel Warden' || Auth::user()->role->name == 'Girls hostel Warden')
+
+                                        <a class="dropdown-item" href="/admin">Admin Panel</a>
+                                        
+                                    @endif
+
                                 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

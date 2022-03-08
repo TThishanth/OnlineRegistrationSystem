@@ -36,10 +36,10 @@ class CreateAcademicsTable extends Migration
             $table->string('Examination');
             $table->string('medium');
             $table->string('Results');
-            $table->mediumText('pastExaminations');
+            $table->mediumText('pastExaminations')->nullable();
             $table->string('amount');
             $table->date('amountPayDate')->nullable();
-            $table->integer('receiptNo');
+            $table->string('receiptNo');
             $table->string('photo_id')->index()->nullable();
             $table->timestamps();
         });

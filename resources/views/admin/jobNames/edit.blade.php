@@ -10,7 +10,7 @@
 
         @include('inc.errors') 
 
-        {!! Form::model($role , ['method' => 'PATCH' , 'action' => ['AdminJobsController@update', $role->id],'files'=>true]) !!}
+        {!! Form::model($job , ['method' => 'PATCH' , 'action' => ['AdminJobsController@update', $job->id],'files'=>true]) !!}
                 
             <div class="form-groups">
                 {{ Form::label('name', 'Job Name :') }}

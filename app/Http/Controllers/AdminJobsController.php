@@ -41,10 +41,21 @@ class AdminJobsController extends Controller
     {
         $input = $request->all();
 
-        Job::create($input);
+        $job = Job::where('name', '=', $request->name)->first();
+        
+        if ($job === null) {
+            // role doesn't exist
 
-        Session::flash('flash_message', 'Job Name created successfully!');
-	    Session::flash('flash_type', 'alert-success');
+            Job::create($input);
+
+            Session::flash('flash_message', 'Job Name created successfully!');
+            Session::flash('flash_type', 'alert-success');
+        }
+        else {
+
+            Session::flash('flash_message', 'Job already exists!');
+            Session::flash('flash_type', 'alert-info');
+        }
 
         return redirect('/admin/jobs');
     }
@@ -86,10 +97,20 @@ class AdminJobsController extends Controller
 
         $input = $request->all();
 
-        $job->update($input);
+        if ($job->name == 'Administrator') {
 
-        Session::flash('flash_message', 'Job Name Edited successfully!');
-        Session::flash('flash_type', 'alert-info');
+            Session::flash('flash_message', 'You can\'t update Administrator job.');
+	        Session::flash('flash_type', 'alert-info');
+
+        }
+        else {
+
+            $job->update($input);
+
+            Session::flash('flash_message', 'Job Name Edited successfully!');
+            Session::flash('flash_type', 'alert-info');
+
+        }
 
         return redirect('/admin/jobs');
     }
@@ -104,10 +125,20 @@ class AdminJobsController extends Controller
     {
         $job = Job::findOrFail($id);
 
-        $job->delete();
+        if ($job->name == 'Administrator') {
 
-        Session::flash('flash_message', 'Job deleted successfully!');
-	    Session::flash('flash_type', 'alert-warning');
+            Session::flash('flash_message', 'You can\'t delete Administrator job.');
+	        Session::flash('flash_type', 'alert-info');
+
+        }
+        else {
+
+            $job->delete();
+
+            Session::flash('flash_message', 'Job deleted successfully!');
+            Session::flash('flash_type', 'alert-warning');
+
+        }
 
         return redirect('/admin/jobs');
     }

@@ -32,7 +32,7 @@ class CreateRepeatsTable extends Migration
             $table->mediumText('reasons');
             $table->string('amount');
             $table->date('amountPayDate')->nullable();
-            $table->integer('receiptNo');
+            $table->string('receiptNo');
             $table->string('photo_id')->index()->nullable();
             $table->timestamps();
         });

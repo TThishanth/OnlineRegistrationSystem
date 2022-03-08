@@ -67,16 +67,20 @@ Route::group(['middleware'=>'admin'],function(){
 
 });
 
-Route::get('/repeat', function () {
-    return view('repeatForm');
-});
+Route::group(['middleware'=>'auth'],function(){
 
-Route::get('/academic', function () {
-    return view('academicForm');
-});
+    Route::get('/repeat', function () {
+        return view('repeatForm');
+    });
 
-Route::get('/hostel', function () {
-    return view('hostelForm');
+    Route::get('/academic', function () {
+        return view('academicForm');
+    });
+
+    Route::get('/hostel', function () {
+        return view('hostelForm');
+    });
+
 });
 
 Route::get('/notAllowed', function () {

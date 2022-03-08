@@ -42,10 +42,21 @@ class AdminRolesController extends Controller
         
         $input = $request->all();
 
-        Role::create($input);
+        $role = Role::where('name', '=', $request->name)->first();
+        
+        if ($role === null) {
+            // role doesn't exist
 
-        Session::flash('flash_message', 'Role created successfully!');
-	    Session::flash('flash_type', 'alert-success');
+            Role::create($input);
+
+            Session::flash('flash_message', 'Role created successfully!');
+            Session::flash('flash_type', 'alert-success');
+
+        } else {
+
+            Session::flash('flash_message', 'Role already exists!');
+            Session::flash('flash_type', 'alert-info');
+        }
 
         return redirect('/admin/roles');
 
@@ -88,10 +99,20 @@ class AdminRolesController extends Controller
 
         $input = $request->all();
 
-        $role->update($input);
+        if ($role->name == 'Administrator') {
 
-        Session::flash('flash_message', 'Role Edited successfully!');
-        Session::flash('flash_type', 'alert-info');
+            Session::flash('flash_message', 'You can\'t update Administrator role.');
+	        Session::flash('flash_type', 'alert-info');
+
+        }
+        else {
+
+            $role->update($input);
+
+            Session::flash('flash_message', 'Role Edited successfully!');
+            Session::flash('flash_type', 'alert-info');
+
+        }
 
         return redirect('/admin/roles');
         
@@ -107,10 +128,19 @@ class AdminRolesController extends Controller
     {
         $role = Role::findOrFail($id);
 
-        $role->delete();
+        if ($role->name == 'Administrator') {
 
-        Session::flash('flash_message', 'Role deleted successfully!');
-	    Session::flash('flash_type', 'alert-warning');
+            Session::flash('flash_message', 'You can\'t delete Administrator role.');
+	        Session::flash('flash_type', 'alert-info');
+
+        }
+        else {
+
+            $role->delete();
+
+            Session::flash('flash_message', 'Role deleted successfully!');
+            Session::flash('flash_type', 'alert-warning');
+        }
 
         return redirect('/admin/roles');
     }

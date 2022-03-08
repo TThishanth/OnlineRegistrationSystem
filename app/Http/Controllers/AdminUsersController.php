@@ -7,6 +7,7 @@ use App\Http\Requests\UsersEditRequest;
 use App\Job;
 use App\Role;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class AdminUsersController extends Controller
@@ -56,10 +57,21 @@ class AdminUsersController extends Controller
             $input['password'] = bcrypt($request->password);
 
         }
-        User::create($input);
 
-        Session::flash('flash_message', 'User created successfully!');
-        Session::flash('flash_type', 'alert-success');
+        $user = User::where('email', '=', $request->email)->first();
+        
+        if ($user === null) {
+        // user doesn't exist
+            User::create($input);
+
+            Session::flash('flash_message', 'User created successfully!');
+            Session::flash('flash_type', 'alert-success');
+        }
+        else {
+            Session::flash('flash_message', 'User already exists!');
+            Session::flash('flash_type', 'alert-info');
+        }
+
         
         $job = Job::findOrFail($input['job_id']);
 
@@ -165,10 +177,17 @@ class AdminUsersController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $user->delete();
+        if (Auth::user()->id == $id) {
 
-        Session::flash('flash_message', 'User deleted successfully!');
-	    Session::flash('flash_type', 'alert-warning');
+            Session::flash('flash_message', 'You can\'t delete your own account!');
+	        Session::flash('flash_type', 'alert-info');
+            
+        } else {
+            $user->delete();
+
+            Session::flash('flash_message', 'User deleted successfully!');
+            Session::flash('flash_type', 'alert-warning');
+        }
 
         $job = Job::findOrFail($user->job_id);
 

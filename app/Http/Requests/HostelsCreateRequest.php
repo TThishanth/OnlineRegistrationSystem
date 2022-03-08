@@ -30,7 +30,7 @@ class HostelsCreateRequest extends FormRequest
             'sex'=> 'required',
             'address'=> 'required',
             'presentAddress'=> 'required', 
-            'contactNo'=> 'required|max:10',
+            'contactNo'=> 'required|digits:10',
             'registered'=> 'required',
             'paymentDate'=> 'required',
             'faculty'=> 'required',

@@ -33,7 +33,7 @@ class RepeatsCreateRequest extends FormRequest
             'course'=> 'required', 
             'address'=> 'required', 
             'addressEx'=> 'required', 
-            'contactNo'=> 'required|max:10', 
+            'contactNo'=> 'required|digits:10', 
             'admissionDate'=> 'required|date', 
             'registered'=> 'required', 
             'paymentDate'=> 'required|date', 

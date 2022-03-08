@@ -70,7 +70,7 @@
                     
                                 <div class="col-12 col-sm-8 pt-3" id="subTel">
                                     {{ Form::label('hNumber', 'Tele. No :') }}
-                                    {{ Form::number('hNumber', null , ['class' => 'form-control']) }}  
+                                    {{ Form::text('hNumber', null , ['class' => 'form-control']) }}  
                                 </div>
                             </div>
                             <br>
@@ -83,7 +83,7 @@
 
                                 <div class="col-12 col-sm-8 pt-3" id="subTel">
                                     {{ Form::label('pNumber', 'Tele. No :') }}
-                                    {{ Form::number('pNumber', null , ['class' => 'form-control']) }}  
+                                    {{ Form::text('pNumber', null , ['class' => 'form-control']) }}  
                                 </div> 
                             </div>
                             <br>
@@ -96,7 +96,7 @@
 
                                 <div class="col-12 col-sm-8 pt-3" id="subTel">
                                     {{ Form::label('cNumber', 'Tele. No :') }}
-                                    {{ Form::number('cNumber', null , ['class' => 'form-control']) }}  
+                                    {{ Form::text('cNumber', null , ['class' => 'form-control']) }}  
                                 </div> 
                             </div>
                         </div>
